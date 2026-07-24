@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Student Dashboard
+{% endblock %}
+
+{% block content %}
+<section class="page-heading">
+    <div>
+        <p class="eyebrow">
+            Student LMS
+        </p>
+
+        <h1>
+            Available Course Topics
+        </h1>
+    </div>
+
+    {% if user.is_authenticated %}
+        <a
+            class="button button-primary"
+            href="{% url 'generate_content' %}"
+        >
+            Generate New Topic
+        </a>
+    {% endif %}
+</section>
+
+<section class="grid">
+    {% for topic in topics %}
+        <article class="card">
+            <span class="badge">
+                Topic {{ forloop.counter }}
+            </span>
+
+            <h2>
+                {{ topic.title }}
+            </h2>
+
+            <p>
+                Teacher: {{ topic.teacher.username }}
+            </p>
+
+            {% if topic.generated_content %}
+                <a
+                    class="button button-secondary"
+                    href="{% url 'view_content' topic.id %}"
+                >
+                    View Content
+                </a>
+            {% else %}
+                <p>
+                    Content pending
+                </p>
+            {% endif %}
+        </article>
+    {% empty %}
+        <article class="card">
+            <h2>
+                No topics available
+            </h2>
+        </article>
+    {% endfor %}
+</section>
+{% endblock %}

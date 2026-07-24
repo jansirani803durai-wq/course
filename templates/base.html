@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <title>
+        {% block title %}
+            Course Content Generator
+        {% endblock %}
+    </title>
+    <link
+        rel="stylesheet"
+        href="{% static 'generator/css/style.css' %}"
+    >
+</head>
+<body>
+    <header class="site-header">
+        <div class="container nav-wrapper">
+            <a
+                class="brand"
+                href="{% url 'student_dashboard' %}"
+            >
+                EduForge AI
+            </a>
+
+            <nav class="nav-links">
+                <a href="{% url 'student_dashboard' %}">
+                    Student Dashboard
+                </a>
+
+                {% if user.is_authenticated %}
+                    <a href="{% url 'generate_content' %}">
+                        Generate Content
+                    </a>
+
+                    <form
+                        method="post"
+                        action="{% url 'logout' %}"
+                    >
+                        {% csrf_token %}
+                        <button
+                            type="submit"
+                            class="nav-button"
+                        >
+                            Logout
+                        </button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'login' %}">
+                        Teacher Login
+                    </a>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+
+    <main class="container page-space">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>

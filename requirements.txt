@@ -1,0 +1,9 @@
+Django==5.2.4
+gunicorn==23.0.0
+whitenoise==6.9.0
+groq==0.31.0
+python-dotenv==1.1.1
+psycopg[binary]==3.2.9
+dj-database-url==3.0.1
+reportlab==4.4.3
+Pillow==11.3.0

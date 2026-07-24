@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ topic.title }}
+{% endblock %}
+
+{% block content %}
+<section class="page-heading">
+    <div>
+        <p class="eyebrow">
+            Study material
+        </p>
+
+        <h1>
+            {{ topic.title }}
+        </h1>
+
+        <p>
+            Teacher: {{ topic.teacher.username }}
+        </p>
+    </div>
+
+    <a
+        class="button button-primary"
+        href="{% url 'export_pdf' topic.id %}"
+    >
+        Download PDF
+    </a>
+</section>
+
+<!-- Questions 33 and 34 -->
+<section class="stack">
+    <article class="card">
+        <h2>
+            Summary
+        </h2>
+
+        {{ summary.summary_text|linebreaks }}
+    </article>
+
+    <article class="card">
+        <h2>
+            Notes
+        </h2>
+
+        {{ generated_content.notes|linebreaks }}
+    </article>
+
+    <article class="card">
+        <h2>
+            Key Points
+        </h2>
+
+        <ul>
+            {% for point in key_points %}
+                <li>
+                    {{ point }}
+                </li>
+            {% endfor %}
+        </ul>
+    </article>
+</section>
+
+<!-- Question 35 -->
+<section class="card quiz-card">
+    <h2>
+        {{ quiz.title }}
+    </h2>
+
+    <p>
+        {{ quiz.description }}
+    </p>
+
+    <form
+        method="post"
+        action="{% url 'submit_quiz' topic.id %}"
+        class="form-stack"
+    >
+        {% csrf_token %}
+
+        {% for question in quiz.questions.all %}
+            <fieldset>
+                <legend>
+                    {{ forloop.counter }}.
+                    {{ question.question_text }}
+                </legend>
+
+                {% for answer in question.answers.all %}
+                    <label class="option">
+                        <input
+                            type="radio"
+                            name="question_{{ question.id }}"
+                            value="{{ answer.id }}"
+                        >
+
+                        {{ answer.answer_text }}
+                    </label>
+                {% endfor %}
+            </fieldset>
+        {% endfor %}
+
+        <button
+            type="submit"
+            class="button button-primary"
+        >
+            Submit Quiz
+        </button>
+    </form>
+</section>
+{% endblock %}

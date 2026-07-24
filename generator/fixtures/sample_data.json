@@ -1,0 +1,74 @@
+[
+  {
+    "model": "auth.user",
+    "pk": 100,
+    "fields": {
+      "password": "!",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "fixture_teacher",
+      "first_name": "Fixture",
+      "last_name": "Teacher",
+      "email": "fixture@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-01-01T00:00:00Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "generator.coursetopic",
+    "pk": 100,
+    "fields": {
+      "title": "Fixture Course Topic",
+      "teacher": 100,
+      "created_at": "2026-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "generator.quiz",
+    "pk": 100,
+    "fields": {
+      "topic": 100,
+      "title": "Fixture Quiz",
+      "description": "Fixture description"
+    }
+  },
+  {
+    "model": "generator.generatedcontent",
+    "pk": 100,
+    "fields": {
+      "topic": 100,
+      "quiz": 100,
+      "notes": "Fixture notes",
+      "key_points": "Point one\nPoint two",
+      "generated_at": "2026-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "generator.summary",
+    "pk": 100,
+    "fields": {
+      "topic": 100,
+      "summary_text": "Fixture summary"
+    }
+  },
+  {
+    "model": "generator.question",
+    "pk": 100,
+    "fields": {
+      "quiz": 100,
+      "question_text": "Fixture question?"
+    }
+  },
+  {
+    "model": "generator.answer",
+    "pk": 100,
+    "fields": {
+      "question": 100,
+      "answer_text": "Fixture answer",
+      "is_correct": true
+    }
+  }
+]

@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Quiz Result
+{% endblock %}
+
+{% block content %}
+<section class="hero center">
+    <p class="eyebrow">
+        Quiz completed
+    </p>
+
+    <h1>
+        Score: {{ score }} / {{ total }}
+    </h1>
+
+    <p>
+        Percentage: {{ percentage }}%
+    </p>
+</section>
+
+<section class="stack">
+    {% for result in results %}
+        <article
+            class="card
+            {% if result.is_correct %}
+                correct
+            {% else %}
+                wrong
+            {% endif %}"
+        >
+            <h2>
+                {{ forloop.counter }}.
+                {{ result.question.question_text }}
+            </h2>
+
+            <p>
+                <strong>
+                    Your answer:
+                </strong>
+
+                {% if result.selected_answer %}
+                    {{ result.selected_answer.answer_text }}
+                {% else %}
+                    Not answered
+                {% endif %}
+            </p>
+
+            <p>
+                <strong>
+                    Correct answer:
+                </strong>
+
+                {% if result.correct_answer %}
+                    {{ result.correct_answer.answer_text }}
+                {% else %}
+                    Not stored
+                {% endif %}
+            </p>
+        </article>
+    {% endfor %}
+</section>
+{% endblock %}

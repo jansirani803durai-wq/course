@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Teacher Login
+{% endblock %}
+
+{% block content %}
+<section class="card narrow-card">
+    <p class="eyebrow">
+        Teacher access
+    </p>
+
+    <h1>
+        Login
+    </h1>
+
+    <form method="post" class="form-stack">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        {% if next %}
+            <input
+                type="hidden"
+                name="next"
+                value="{{ next }}"
+            >
+        {% endif %}
+
+        <button
+            type="submit"
+            class="button button-primary"
+        >
+            Login
+        </button>
+    </form>
+</section>
+{% endblock %}

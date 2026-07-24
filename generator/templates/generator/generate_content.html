@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Generate Content
+{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <p class="eyebrow">
+        Teacher workspace
+    </p>
+
+    <h1>
+        Generate complete course content
+    </h1>
+
+    <p>
+        Groq AI creates detailed notes,
+        key points, a summary and a quiz.
+    </p>
+</section>
+
+<section class="card narrow-card">
+    <form method="post" class="form-stack">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button
+            type="submit"
+            class="button button-primary"
+        >
+            Generate with Groq AI
+        </button>
+    </form>
+</section>
+{% endblock %}
